@@ -3,7 +3,7 @@ package com.martinez.aaron.jaxrxMessenger.model;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
-
+ 
 // This annotation is needed when Jersey tries to convert a Message to XML
 @XmlRootElement
 public class Message {
