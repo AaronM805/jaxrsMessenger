@@ -1,9 +1,14 @@
 package com.martinez.aaron.jaxrxMessenger.resources;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import com.martinez.aaron.jaxrxMessenger.model.Message;
+import com.martinez.aaron.jaxrxMessenger.service.MessageService;
 
 @Path("messages")
 public class MessageResource {
@@ -14,8 +19,10 @@ public class MessageResource {
 	 * @return String that will be returned as a text/plain response.
 	 */
 	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getMessages() {
-		return "Hello World!";
+	@Produces(MediaType.APPLICATION_XML)
+	public List<Message> getMessages() {
+		MessageService service = new MessageService();
+		
+		return service.getAllMessages();
 	}
 }
