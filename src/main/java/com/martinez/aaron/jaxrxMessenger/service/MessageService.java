@@ -1,6 +1,7 @@
 package com.martinez.aaron.jaxrxMessenger.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,30 @@ public class MessageService {
 	
 	public List<Message> getAllMessages() {
 		return new ArrayList<>(messages.values());
+	}
+	
+	public List<Message> getAllMessagesForYear(int year) {
+		List<Message> messagesForYear = new ArrayList<>();
+		Calendar cal = Calendar.getInstance();
+		
+		for(Message message : messages.values()) {
+			cal.setTime(message.getCreated());
+			
+			if(cal.get(Calendar.YEAR) == year) {
+				messagesForYear.add(message);
+			}
+		}
+		return messagesForYear;
+	}
+	
+	public List<Message> getAllMessagesPaginated(int start, int size) {
+		List<Message> messageList = new ArrayList<>(messages.values());
+		
+		if(start + size > messageList.size()) {
+			return new ArrayList<>();
+		}
+		
+		return messageList.subList(start, start + size);
 	}
 	
 	public Message getMessage(long id) {
