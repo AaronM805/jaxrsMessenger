@@ -1,12 +1,12 @@
-package com.martinez.aaron.jaxrxMessenger.service;
+package com.martinez.aaron.jaxrsMessenger.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
-import com.martinez.aaron.jaxrxMessenger.database.DatabaseClass;
-import com.martinez.aaron.jaxrxMessenger.model.Message;
+import com.martinez.aaron.jaxrsMessenger.database.DatabaseClass;
+import com.martinez.aaron.jaxrsMessenger.model.Message;
 
 public class MessageService {
 	private Map<Long, Message> messages = DatabaseClass.getMessages();

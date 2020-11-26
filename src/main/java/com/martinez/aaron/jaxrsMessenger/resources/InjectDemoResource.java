@@ -1,4 +1,4 @@
-package com.martinez.aaron.jaxrxMessenger.resources;
+package com.martinez.aaron.jaxrsMessenger.resources;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.CookieParam;

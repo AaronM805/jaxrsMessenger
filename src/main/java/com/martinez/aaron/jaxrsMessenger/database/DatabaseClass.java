@@ -1,10 +1,10 @@
-package com.martinez.aaron.jaxrxMessenger.database;
+package com.martinez.aaron.jaxrsMessenger.database;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.martinez.aaron.jaxrxMessenger.model.Message;
-import com.martinez.aaron.jaxrxMessenger.model.Profile;
+import com.martinez.aaron.jaxrsMessenger.model.Message;
+import com.martinez.aaron.jaxrsMessenger.model.Profile;
 
 /*
  * This is not thread safe
