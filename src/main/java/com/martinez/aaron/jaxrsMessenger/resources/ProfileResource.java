@@ -1,4 +1,4 @@
-package com.martinez.aaron.jaxrxMessenger.resources;
+package com.martinez.aaron.jaxrsMessenger.resources;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.martinez.aaron.jaxrxMessenger.model.Profile;
-import com.martinez.aaron.jaxrxMessenger.service.ProfileService;
+import com.martinez.aaron.jaxrsMessenger.model.Profile;
+import com.martinez.aaron.jaxrsMessenger.service.ProfileService;
 
 @Path("profiles")
 @Produces(MediaType.APPLICATION_JSON)

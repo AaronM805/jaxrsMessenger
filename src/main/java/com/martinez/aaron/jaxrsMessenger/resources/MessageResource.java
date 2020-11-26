@@ -1,4 +1,4 @@
- package com.martinez.aaron.jaxrxMessenger.resources;
+ package com.martinez.aaron.jaxrsMessenger.resources;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -18,11 +18,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.UriInfo;
 
-import com.martinez.aaron.jaxrxMessenger.model.Message;
-import com.martinez.aaron.jaxrxMessenger.resources.beans.MessageFilterBean;
-import com.martinez.aaron.jaxrxMessenger.service.MessageService;
+import com.martinez.aaron.jaxrsMessenger.model.Message;
+import com.martinez.aaron.jaxrsMessenger.resources.beans.MessageFilterBean;
+import com.martinez.aaron.jaxrsMessenger.service.MessageService;
+
+import javax.ws.rs.core.UriInfo;
 
 @Path("/messages")
 // If every method consumes/produces the same media type, we can just annotate the whole class.

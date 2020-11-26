@@ -1,4 +1,4 @@
-package com.martinez.aaron.jaxrxMessenger.resources.beans;
+package com.martinez.aaron.jaxrsMessenger.resources.beans;
 
 import javax.ws.rs.QueryParam;
 

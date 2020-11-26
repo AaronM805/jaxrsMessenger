@@ -1,4 +1,4 @@
-package com.martinez.aaron.jaxrxMessenger.model;
+package com.martinez.aaron.jaxrsMessenger.model;
 
 import java.util.Date;
 
