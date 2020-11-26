@@ -50,7 +50,8 @@ public class MessageService {
 	
 	public Message addMessage(Message message) {
 		message.setId(messages.size() + 1);
-		return messages.put(message.getId(), message);
+		messages.put(message.getId(), message);
+		return messages.get(message.getId());
 	}
 	
 	public Message updateMessage(Message message) {
