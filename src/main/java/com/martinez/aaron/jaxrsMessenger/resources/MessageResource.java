@@ -29,6 +29,7 @@ import javax.ws.rs.core.UriInfo;
 // If every method consumes/produces the same media type, we can just annotate the whole class.
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+//@Produces(value = {MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
 public class MessageResource {
 	MessageService service = new MessageService();
 	
@@ -50,8 +51,19 @@ public class MessageResource {
 	// variable path
 	@Path("/{messageId}")
 	// Injects path param to parameter type.
-	public Message getMessage(@PathParam("messageId") long messageId) {
-		return service.getMessage(messageId);
+	public Message getMessage(@PathParam("messageId") long messageId, @Context UriInfo uriInfo) {
+		/*
+		 * since message resource doesn't catch the exception, it gets thrown further to the Tomcat Servlet container and the servlet container has default behavior
+		 * for exceptions that get bubbled up.
+		 * 
+		 * What we want is for the framework to catch this and return a JSON response so that it doesn't go all of the way up to the Tomcat Servlet container.
+		 */
+		Message message = service.getMessage(messageId);
+		message.addLink(getUriForSelf(uriInfo, message), "self");
+		message.addLink(getUriForProfile(uriInfo, message), "profile");
+		// TODO: implement comments resource
+//		message.addLink(getUriForComments(uriInfo, message), "comments");
+		return message;
 	}
 	
 	/**
@@ -60,8 +72,10 @@ public class MessageResource {
 	 * @return String that will be returned as a text/plain response.
 	 */
 	@GET
-	public List<Message> getMessages(@QueryParam("year") int year, @QueryParam("start") int start,
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Message> getJsonMessages(@QueryParam("year") int year, @QueryParam("start") int start,
 									 @QueryParam("size") int size) {
+		System.out.println("JSON content type");
 		if(year > 0) {
 			return service.getAllMessagesForYear(year);
 		}
@@ -73,9 +87,11 @@ public class MessageResource {
 		return service.getAllMessages();
 	}
 	
-//	@GET
+	 @GET
+	 @Produces(MediaType.TEXT_XML)
 	// This is an alternative to above method
-	public List<Message> getMessages(@BeanParam MessageFilterBean filterBean) {
+	public List<Message> getXmlMessages(@BeanParam MessageFilterBean filterBean) {
+		 System.out.println("XML content type");
 		if(filterBean.getYear() > 0) {
 			return service.getAllMessagesForYear(filterBean.getYear());
 		}
@@ -105,4 +121,33 @@ public class MessageResource {
 		return new CommentResource();
 	}
 	
+	private String getUriForProfile(UriInfo uriInfo, Message message) {
+		String url = uriInfo.getBaseUriBuilder()
+							.path(ProfileResource.class)
+							.path(message.getAuthor())
+							.build()
+							.toString();
+		return url;
+	}
+
+	private String getUriForSelf(UriInfo uriInfo, Message message) {
+		String url = uriInfo.getBaseUriBuilder()
+							.path(MessageResource.class)
+							.path(Long.toString(message.getId()))
+							.build()
+							.toString();
+		return url;
+	}
+	
+	private String getUriForComments(UriInfo uriInfo, Message message) {
+		
+		String url = uriInfo.getBaseUriBuilder()
+							.path(MessageResource.class)
+							.path(MessageResource.class, "getCommentResource")
+							.path(CommentResource.class)
+							.resolveTemplate("messageId", message.getId())
+							.build()
+							.toString();
+		return url;
+	}
 }

@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.martinez.aaron</groupId>
-    <artifactId>jaxrxMessenger</artifactId>
+    <artifactId>jaxrsMessenger</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>jaxrxMessenger</name>
+    <name>jaxrsMessenger</name>
 
     <build>
-        <finalName>jaxrxMessenger</finalName>
+        <finalName>jaxrsMessenger</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

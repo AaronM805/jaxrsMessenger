@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.martinez.aaron.jaxrsMessenger.database.DatabaseClass;
+import com.martinez.aaron.jaxrsMessenger.exception.DataNotFoundException;
 import com.martinez.aaron.jaxrsMessenger.model.Message;
 
 public class MessageService {
 	private Map<Long, Message> messages = DatabaseClass.getMessages();
 	
 	public MessageService() {
-		messages.put(1L, new Message(1L, "Hello World", "Aaron"));
+		messages.put(1L, new Message(1L, "Hello World", "aaron"));
 		messages.put(2L,  new Message(2L, "Andre Baby", "Drizzle"));
 	}
 	
@@ -45,7 +46,16 @@ public class MessageService {
 	}
 	
 	public Message getMessage(long id) {
-		return messages.get(id);
+		Message message = messages.get(id);
+		
+		if(message == null) {
+			/*
+			 * We throw this exception to the resource.
+			 */
+			throw new DataNotFoundException("Message with id " + id + " not found");
+		}
+		
+		return message;
 	}
 	
 	public Message addMessage(Message message) {
